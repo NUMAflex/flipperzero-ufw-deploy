@@ -1,1 +1,1 @@
-# flipperzero-deploy
+# Flipper Zero Deploy
