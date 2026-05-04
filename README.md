@@ -35,14 +35,17 @@ Clone the repository:
 ```bash
 git clone https://github.com/NUMAflex/flipperzero-deploy.git
 cd flipperzero-deploy
+```
 
 Make the script executable:
 ```bash
 chmod +x flipper.sh
+```
 
 Run it:
 ```bash
 ./flipper.sh
+```
 
 📁 Expected structure
 
