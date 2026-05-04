@@ -50,8 +50,10 @@ Run it:
 📁 Expected structure
 
 Typical Flipper Zero layout:
+```bash
 /ext/
  ├── apps/
  ├── badusb/
  ├── subghz/
  └── nfc/
+```
