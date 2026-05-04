@@ -43,3 +43,12 @@ chmod +x flipper.sh
 Run it:
 ```bash
 ./flipper.sh
+
+📁 Expected structure
+
+Typical Flipper Zero layout:
+/ext/
+ ├── apps/
+ ├── badusb/
+ ├── subghz/
+ └── nfc/
