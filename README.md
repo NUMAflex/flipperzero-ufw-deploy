@@ -2,8 +2,6 @@
 
 A straightforward shell script to deploy files to your Flipper Zero.
 
-> Manually copying files in 2026 is optional. This exists to keep it that way.
-
 ---
 
 ## 📦 Overview
@@ -37,3 +35,11 @@ Clone the repository:
 ```bash
 git clone https://github.com/NUMAflex/flipperzero-deploy.git
 cd flipperzero-deploy
+
+Make the script executable:
+```bash
+chmod +x flipper.sh
+
+Run it:
+```bash
+./flipper.sh
