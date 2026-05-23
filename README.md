@@ -50,14 +50,14 @@ Run it:
 ./flipper.sh --help
 
  Commands:
- --clean-fap \terase all your previous fap
- --clean-totp \terase all your previous totp plugins
- --new-fw \tcopy new firmware version from released zip files
- --copy-sd \tcopy files to sd card
- --get-fw \tdownload new firmware version zip files
- --get-apps \tdownload base and extra apps zip files
- --uberguidoz \clone UberGuidoZ repository (or update if present)
- --help \t(this screen)
+ --clean-fap   erase all your previous fap
+ --clean-totp  erase all your previous totp plugins
+ --new-fw      copy new firmware version from released zip files
+ --copy-sd     copy files to sd card
+ --get-fw      download new firmware version zip files
+ --get-apps    download base and extra apps zip files
+ --uberguidoz  clone UberGuidoZ repository (or update if present)
+ --help (this screen)
  --about
 ```
 
