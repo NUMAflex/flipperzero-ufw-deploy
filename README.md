@@ -48,6 +48,17 @@ chmod +x flipper.sh
 Run it:
 ```bash
 ./flipper.sh --help
+
+ Commands:
+ --clean-fap \terase all your previous fap
+ --clean-totp \terase all your previous totp plugins
+ --new-fw \tcopy new firmware version from released zip files
+ --copy-sd \tcopy files to sd card
+ --get-fw \tdownload new firmware version zip files
+ --get-apps \tdownload base and extra apps zip files
+ --uberguidoz \clone UberGuidoZ repository (or update if present)
+ --help \t(this screen)
+ --about
 ```
 
 
