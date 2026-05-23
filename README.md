@@ -1,15 +1,16 @@
 # 🐬 Flipper Zero Deploy Script
 
-A straightforward shell script to deploy files to your Flipper Zero.
+A straightforward shell script to manage & deploy [DarkFlippers/unleashed-firmware](https://github.com/DarkFlippers/unleashed-firmware) files to your Flipper Zero.
 
 ---
 
 ## 📦 Overview
 
-`flipper.sh` is a minimal automation tool for pushing files to a Flipper Zero.
+`flipper.sh` is a minimal automation tool for pushing files to a Flipper Zero every time there is a new UFW version release.
 
 It handles common repetitive tasks such as:
 
+- Download new UFW releases
 - File transfers
 - Directory organization
 - Quick payload deployment
@@ -44,16 +45,30 @@ chmod +x flipper.sh
 
 Run it:
 ```bash
-./flipper.sh
+./flipper.sh --help
 ```
 
 📁 Expected structure
 
-Typical Flipper Zero layout:
+Typical Directory layout:
 ```bash
-/ext/
+Flipper/
+ ext/
  ├── apps/
+ ├── apps_data/
  ├── badusb/
+ ├── infrared/
+ ├── music_player/
+ ├── nfc/
+ ├── pocsag/ (optional)
  ├── subghz/
- └── nfc/
+ ├── subghz_remote/
+ ├── subplaylist/
+ └── tama_p1/
+ fw/
+ ├── all-the-apps-base.zip
+ ├── all-the-apps-extra.zip
+ ├── flipper-z-f7-update-unlshd-089.tgz (optional)
+ ├── flipper-z-f7-update-unlshd-089c.tgz
+ └── flipper-z-f7-update-unlshd-089e.tgz (optional)
 ```
