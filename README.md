@@ -17,6 +17,7 @@ It handles common repetitive tasks such as:
 
 The goal is simple: **reduce friction and avoid mistakes**.
 
+
 ---
 
 ## ⚙️ Requirements
@@ -28,6 +29,7 @@ The goal is simple: **reduce friction and avoid mistakes**.
 No heavy dependencies expected.
 
 ---
+
 
 ## 🚀 Usage
 
@@ -47,6 +49,7 @@ Run it:
 ```bash
 ./flipper.sh --help
 ```
+
 
 📁 Expected structure
 
@@ -72,3 +75,6 @@ Flipper/
  ├── flipper-z-f7-update-unlshd-089c.tgz
  └── flipper-z-f7-update-unlshd-089e.tgz (optional)
 ```
+
+## 🔗 Links
+- **Unleashed web page:** [flipperunleashed.com](https://flipperunleashed.com)
