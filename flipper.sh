@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-SCRIPT_VERSION=0.2.5
-#DEBUG="yes"
-
 #################################################################################
 #Copyright (C) 2007 Free Software Foundation.
 
@@ -22,26 +19,35 @@ SCRIPT_VERSION=0.2.5
 
 ##################################################################################
 
+SCRIPT_VERSION=0.89
+
+# 1.0.ufw    00/00/2027 firmware development functions implemented (repo update, --build and all that)
+
+# 0.89  03/07/2026 second most fully tested and refactored version yet (ufw syncronized versioning as of ufw 0.89)
+# 0.3.1 04/06/2026 added all cool faps
+# 0.3   01/06/2026 dialog wrapped progress bar
+# 0.2.6 08/05/2026 added tagtinker fap (extra)
+# 0.2   31/12/2025 most fully tested and working version (menu interface, welcome message and debug flag added)
+# 0.1   00/00/2023 first commit
+
 # mostly stolen from alsa-info.sh and Kali Nethunter Kernel build.sh
 
-# 0.1 0/0/2023 first commit
-# 0.2 31/12/2025 most fully tested and working version (menu interface, welcome message and debug flag added)
-# 0. //2026 firmware development functions implemented (--build)
-
-WORKDIR="$HOME/Documents/Flipper"
-FWDIR="$WORKDIR/fw"
-EXTDIR="$WORKDIR/ext"
-APDIR="$EXTDIR/apps"
-APDDIR="$EXTDIR/apps_data"
-BASEZFILE="all-the-apps-base.zip"
-BASEFILEDIR="base_pack_build/artifacts-base"
-EXTRAZFILE="all-the-apps-extra.zip"
-EXTRAFILEDIR="extra_pack_build/artifacts-extra"
-TOTPFILEDIR="base_pack_build/apps_data"
+readonly WORKDIR="$HOME/Documents/Flipper"
+readonly FWDIR="$WORKDIR/fw"
+readonly EXTDIR="$WORKDIR/ext"
+readonly APDIR="$EXTDIR/apps"
+readonly APDDIR="$EXTDIR/apps_data"
+readonly BASEZFILE="all-the-apps-base.zip"
+readonly BASEFILEDIR="base_pack_build/artifacts-base"
+readonly EXTRAZFILE="all-the-apps-extra.zip"
+readonly EXTRAFILEDIR="extra_pack_build/artifacts-extra"
+readonly TOTPFILEDIR="base_pack_build/apps_data"
+# readonly DEBUG=1
 # Escape spaces in literals. Quote variables at expansion.
-if [ -v DEBUG ] ; then
+if (( DEBUG )) ; then
 	SDDIR="$WORKDIR/FLIPPER SD"
 else
+	# CHANGE THIS TO YOUR SD CARD MOUNTED DIR (also make sure it's Flipper Formated, labeled FLIPPER SD)
 	SDDIR="/run/media/numaflex/FLIPPER SD"
 fi
 
@@ -49,117 +55,18 @@ fi
 #############################################
 # ! - comment to skip FAP category entirely #
 #############################################
-BLDIR="Bluetooth"
-GMDIR="Games"
-GPDIR="GPIO"
-IBDIR="iButton"
-IRDIR="Infrared"
-MDDIR="Media"
-NFDIR="NFC"
-RFDIR="RFID"
-SBDIR="Sub-GHz"
-TLDIR="Tools"
-USDIR="USB"
+readonly BLDIR="Bluetooth"
+readonly GMDIR="Games"
+readonly GPDIR="GPIO"
+readonly IBDIR="iButton"
+readonly IRDIR="Infrared"
+readonly MDDIR="Media"
+readonly NFDIR="NFC"
+readonly RFDIR="RFID"
+readonly SBDIR="Sub-GHz"
+readonly TLDIR="Tools"
+readonly USDIR="USB"
 
-
-#########################################################
-# ! - EACH AND EVERY FAP SHOULD HAVE A NAME ENTRY BELOW #
-#########################################################
-
-#############
-# Bluetooth #
-#############
-BLE_SPAM="ble_spam.fap"
-
-#########
-# Games #
-#########
-TAMA_P1="tama_p1.fap" # extra
-SNAKE20="snake20.fap" # extra
-T_REX_RUNNER="t_rex_runner.fap" # extra
-
-########
-# GPIO #
-########
-I2CTOOLS="i2ctools.fap"
-LIGHTMETER="lightmeter.fap"
-NRF24_MOUSE_JACKER="nrf24_mouse_jacker.fap"
-NRF24_SNIFFER="nrf24_sniffer.fap"
-SIGNAL_GENERATOR="signal_generator.fap"
-SPI_MEM_MANAGER="spi_mem_manager.fap"
-UART_TERMINAL="uart_terminal.fap"
-UNITEMP="unitemp.fap"
-
-###########
-# iButton #
-###########
-FUZZER_IBTN="fuzzer_ibtn.fap"
-IBUTTON_CONVERTER="ibutton_converter.fap"
-
-############
-# Infrared #
-############
-IR_SCOPE="ir_scope.fap"
-
-#########
-# Media #
-#########
-METRONOME="metronome.fap"
-MORSE_CODE="morse_code.fap"
-MUSIC_PLAYER="music_player.fap"
-WAV_PLAYER="wav_player.fap"
-
-#######
-# NFC #
-#######
-MFC_EDITOR="mfc_editor.fap"
-NFC_EINK="nfc_eink.fap"
-NFC_MAGIC="nfc_magic.fap"
-NFC_MAKER="nfc_maker.fap"
-PICOPASS="picopass.fap"
-
-########
-# RFID #
-########
-FUZZER_RFID="fuzzer_rfid.fap"
-
-###########
-# Sub-GHz #
-###########
-FLIPPER_SHARE="flipper_share.fap"
-#POCSAG_PAGER="pocsag_pager.fap"
-RADIO_SCANNER="radio_scanner.fap"
-SPECTRUM_ANALYZER="spectrum_analyzer.fap"
-SUBGHZ_BRUTEFORCER="subghz_bruteforcer.fap"
-SUBGHZ_PLAYLIST="subghz_playlist.fap"
-SUBGHZ_SCHEDULER="subghz_scheduler.fap"
-#WEATHER_STATION="weather_station.fap"
-
-#########
-# Tools #
-#########
-BARCODE_APP="barcode_app.fap"
-DTMF_DOLPHIN="dtmf_dolphin.fap"
-HEX_VIEWER="hex_viewer.fap"
-MULTI_CONVERTER="multi_converter.fap"
-NFC_RFID_DETECTOR="nfc_rfid_detector.fap"
-QUAC="quac.fap"
-TEXT_VIEWER="text_viewer.fap"
-TOTP="totp.fap"
-KEY_COPIER="key_copier.fap" # extra
-
-#######
-# USB #
-#######
-MASS_STORAGE="mass_storage.fap"
-
-#########################################################
-# ! - EACH AND EVERY FAP SHOULD HAVE A NAME ENTRY ABOVE #
-#########################################################
-
-
-# Move to the working dir
-cd $WORKDIR || return 1
 
 #Set the locale (this may or may not be a good idea.. let me know)
 export LC_ALL=C
@@ -186,9 +93,338 @@ blink_red='\033[05;31m'
 restore='\033[0m'
 reset='\e[0m'
 
+
 ##############################################
 # Functions
 ##############################################
+# Bootstrap dir structure
+function _foo_dir_bootstrap() {
+	if [[ ! -d "$WORKDIR" ]]; then
+		mkdir -pv "$WORKDIR"/{apps/{$BLDIR,$GMDIR,$GPDIR,$IBDIR,$IRDIR,$MDDIR,$NFDIR,$RFDIR,$SBDIR,$TLDIR,$USDIR},{badusb,infrared,music_player,nfc,pocsag,subghz,subghz_remote,subplaylist,tama_p1},apps_data/{totp/plugins,fordradiocodes}}
+	fi
+}
+
+# Bootstrap DEBUG dir structure
+function _foo_dir_dbootstrap() {
+	if [[ ! -d "$WORKDIR/FLIPPER\ SD" ]]; then
+		mkdir -pv "$WORKDIR"/FLIPPER\ SD/{apps/{$BLDIR,$GMDIR,$GPDIR,$IBDIR,$IRDIR,$MDDIR,$NFDIR,$RFDIR,$SBDIR,$TLDIR,$USDIR},{badusb,infrared,music_player,nfc,pocsag,subghz,subghz_remote,subplaylist,tama_p1},apps_data/{totp/plugins,fordradiocodes}}
+	fi
+}
+
+# splash related
+function _tinker-toy() {
+	echo -e "${yellow}
+			o--o o                      o-o
+			|    | o                   o  /o
+			O-o  |   o-o  o-o  o-o o-o | / |
+			|    | | |  | |  | |-' |   o/  o
+			o    o | O-o  O-o  o-o o    o-o
+				 |    |
+				 o    o
+	\n\t\t\t$BGTITLE${reset}\n"
+}
+
+function _moscow() {
+	echo -e "${yellow}
+		  #   ##### #   # ##### ##### ##### ####  ###
+		 ###   #  # #  ## #   # #   # #     #   # # #
+		# # #  #  # # # # #   # #   # ####  ####  # #
+		 ###   #  # ##  # #   # #   # #     #     # #
+		  #   #   # #   # #   # #   # ##### #     ###
+	\n\t\t\t$BGTITLE${reset}\n"
+}
+
+function _dos-rebel() {
+	echo -e "${yellow}
+	 ███████████ ████   ███
+	░░███░░░░░░█░░███  ░░░
+	 ░███   █ ░  ░███  ████  ████████  ████████   ██████  ████████
+	 ░███████    ░███ ░░███ ░░███░░███░░███░░███ ███░░███░░███░░███
+	 ░███░░░█    ░███  ░███  ░███ ░███ ░███ ░███░███████  ░███ ░░░
+	 ░███  ░     ░███  ░███  ░███ ░███ ░███ ░███░███░░░   ░███
+	 █████       █████ █████ ░███████  ░███████ ░░██████  █████
+	░░░░░       ░░░░░ ░░░░░  ░███░░░   ░███░░░   ░░░░░░  ░░░░░
+				 ░███      ░███
+				 █████     █████
+				░░░░░     ░░░░░
+	\n\t\t$BGTITLE${reset}\n"
+}
+
+function _bloody() {
+	echo -e "${yellow}
+	  █████▒██▓     ██▓ ██▓███   ██▓███  ▓█████  ██▀███
+	▓██   ▒▓██▒    ▓██▒▓██░  ██▒▓██░  ██▒▓█   ▀ ▓██ ▒ ██▒
+	▒████ ░▒██░    ▒██▒▓██░ ██▓▒▓██░ ██▓▒▒███   ▓██ ░▄█ ▒
+	░▓█▒  ░▒██░    ░██░▒██▄█▓▒ ▒▒██▄█▓▒ ▒▒▓█  ▄ ▒██▀▀█▄
+	░▒█░   ░██████▒░██░▒██▒ ░  ░▒██▒ ░  ░░▒████▒░██▓ ▒██▒
+	 ▒ ░   ░ ▒░▓  ░░▓  ▒▓▒░ ░  ░▒▓▒░ ░  ░░░ ▒░ ░░ ▒▓ ░▒▓░
+	 ░     ░ ░ ▒  ░ ▒ ░░▒ ░     ░▒ ░      ░ ░  ░  ░▒ ░ ▒░
+	 ░ ░     ░ ░    ▒ ░░░       ░░          ░     ░░   ░
+		   ░  ░ ░                       ░  ░   ░
+	\n\t\t$BGTITLE${reset}\n"
+}
+
+function _poison() {
+	echo -e "${yellow}
+	@@@@@@@@  @@@       @@@  @@@@@@@   @@@@@@@   @@@@@@@@  @@@@@@@
+	@@@@@@@@  @@@       @@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@
+	@@!       @@!       @@!  @@!  @@@  @@!  @@@  @@!       @@!  @@@
+	!@!       !@!       !@!  !@!  @!@  !@!  @!@  !@!       !@!  @!@
+	@!!!:!    @!!       !!@  @!@@!@!   @!@@!@!   @!!!:!    @!@!!@!
+	!!!!!:    !!!       !!!  !!@!!!    !!@!!!    !!!!!:    !!@!@!
+	!!:       !!:       !!:  !!:       !!:       !!:       !!: :!!
+	:!:        :!:      :!:  :!:       :!:       :!:       :!:  !:!
+	 ::        :: ::::   ::   ::        ::        :: ::::  ::   :::
+	 :        : :: : :  :     :         :        : :: ::    :   : :
+	\n\t\t$BGTITLE${reset}\n"
+}
+
+#  Let me tell you something, this is the 1990's, alright? In this day and age a man has to have choices, a man has to have a little bit of variety.
+function _splash() {
+	clear
+	let "SPLASH = $RANDOM % 6 +1";
+	case $SPLASH in
+		1)
+			_tinker-toy
+		;;
+		2)
+			_moscow
+		;;
+		3)
+			_dos-rebel
+		;;
+		4)
+			_bloody
+		;;
+		5)
+			_poison
+		;;
+		*)
+			_moscow
+		;;
+	esac
+}
+
+# chaotic evil sign-off
+function _signoff() {
+	echo -e "\nciao."
+}
+
+
+#
+# me·tic·u·lous·ly
+#
+# i'm a good man and thorough
+#
+
+
+declare -a FAPS=()
+
+function _foo_register_fap() {
+	[[ -n "$2" && -n "$3" ]] || return
+	FAPS+=("$1|$2|$3")
+}
+
+
+
+##############################################################################################################
+# ! - EACH AND EVERY FAP SHOULD HAVE A NAME ENTRY BELOW                                                      #
+#                                                                                                            #
+#   this reflects my personal selection built on top of the clean ufw version (less extra apps),             #
+#   the idea is for you explore the fap ecosystem and modify it according to your needs. have fun.           #
+#                                                                                                            #
+#  Hint:                                                                                                     #
+#   type _foo_register_fap base_or_extra "FAP_DIR_NAME" "fap_name_as_in_zip.fap"                             #
+#                                                                                                            #
+##############################################################################################################
+
+
+#############
+# Bluetooth #
+#############
+# BLE_SPAM
+_foo_register_fap base "$BLDIR" "ble_spam.fap"
+
+
+#########
+# Games #
+#########
+# SNAKE20 (extra)
+_foo_register_fap extra "$GMDIR" "snake20.fap" # extra package
+# T_REX_RUNNER (extra)
+_foo_register_fap extra "$GMDIR" "t_rex_runner.fap" # extra
+# TAMA_P1 (extra)
+_foo_register_fap extra "$GMDIR" "tama_p1.fap" # extra
+
+
+########
+# GPIO #
+########
+# I2CTOOLS
+_foo_register_fap base "$GPDIR" "i2ctools.fap"
+# LIGHTMETER
+_foo_register_fap base "$GPDIR" "lightmeter.fap"
+# NRF24_MOUSE_JACKER
+_foo_register_fap base "$GPDIR" "nrf24_mouse_jacker.fap"
+# NRF24_SNIFFER
+_foo_register_fap base "$GPDIR" "nrf24_sniffer.fap"
+# SIGNAL_GENERATOR
+_foo_register_fap base "$GPDIR" "signal_generator.fap"
+# SPI_MEM_MANAGER
+_foo_register_fap base "$GPDIR" "spi_mem_manager.fap"
+# UART_TERMINAL
+_foo_register_fap base "$GPDIR" "uart_terminal.fap"
+# UNITEMP
+_foo_register_fap base "$GPDIR" "unitemp.fap"
+
+
+###########
+# iButton #
+###########
+# FUZZER_IBTN
+_foo_register_fap base "$IBDIR" "fuzzer_ibtn.fap"
+# IBUTTON_CONVERTER
+_foo_register_fap base "$IBDIR" "ibutton_converter.fap"
+
+
+############
+# Infrared #
+############
+# IR_SCOPE
+_foo_register_fap base "$IRDIR" "ir_scope.fap"
+# TAGTINKER (extra)
+_foo_register_fap extra "$IRDIR" "tagtinker.fap" # extra
+
+
+#########
+# Media #
+#########
+# METRONOME
+_foo_register_fap base "$MDDIR" "metronome.fap"
+# MORSE_CODE
+_foo_register_fap base "$MDDIR" "morse_code.fap"
+# MUSIC_PLAYER
+_foo_register_fap base "$MDDIR" "music_player.fap"
+# WAV_PLAYER
+_foo_register_fap base "$MDDIR" "wav_player.fap"
+
+
+#######
+# NFC #
+#######
+# MFC_EDITOR
+_foo_register_fap base "$NFDIR" "mfc_editor.fap"
+# NFC_EINK
+_foo_register_fap base "$NFDIR" "nfc_eink.fap"
+# NFC_MAGIC
+_foo_register_fap base "$NFDIR" "nfc_magic.fap"
+# NFC_MAKER
+_foo_register_fap base "$NFDIR" "nfc_maker.fap"
+# PICOPASS
+_foo_register_fap base "$NFDIR" "picopass.fap"
+
+
+########
+# RFID #
+########
+# FUZZER_RFID
+_foo_register_fap base "$RFDIR" "fuzzer_rfid.fap"
+# RFID_METAL_DETECTOR (extra)
+_foo_register_fap extra "$RFDIR" "rfid_metal_detector.fap" # extra
+
+
+###########
+# Sub-GHz #
+###########
+# FLIPPER_SHARE
+_foo_register_fap base "$SBDIR" "flipper_share.fap"
+# POCSAG_PAGER
+#_foo_register_fap base "$SBDIR" "pocsag_pager.fap"
+# PROTO_PIRATE
+_foo_register_fap base "$SBDIR" "proto_pirate.fap"
+# PROTOVIEW
+_foo_register_fap base "$SBDIR" "protoview.fap"
+# RADIO_SCANNER
+_foo_register_fap base "$SBDIR" "radio_scanner.fap"
+# SPECTRUM_ANALYZER
+_foo_register_fap base "$SBDIR" "spectrum_analyzer.fap"
+# SUB_DUP_FINDER (extra)
+_foo_register_fap extra "$SBDIR" "sub_dup_finder.fap" # extra
+# SUBGHZ_BRUTEFORCER
+_foo_register_fap base "$SBDIR" "subghz_bruteforcer.fap"
+# SUBGHZ_PLAYLIST
+_foo_register_fap base "$SBDIR" "subghz_playlist.fap"
+# SUBGHZ_PLAYLIST_CREATOR
+_foo_register_fap extra "$SBDIR" "subghz_playlist_creator.fap" # extra
+# SUBGHZ_RAW_EDIT
+_foo_register_fap extra "$SBDIR" "subghz_raw_edit.fap" # extra
+# SUBGHZ_SCHEDULER
+_foo_register_fap base "$SBDIR" "subghz_scheduler.fap"
+# WEATHER_STATION
+#_foo_register_fap base "$SBDIR" "weather_station.fap"
+
+
+#########
+# Tools #
+#########
+# BARCODE_APP
+_foo_register_fap base "$TLDIR" "barcode_app.fap"
+# DTMF_DOLPHIN
+_foo_register_fap base "$TLDIR" "dtmf_dolphin.fap"
+# FORDRADIOCODE (extra)
+_foo_register_fap extra "$TLDIR" "fordradiocode.fap" # extra
+# HEX_VIEWER
+_foo_register_fap base "$TLDIR" "hex_viewer.fap"
+# KEY_COPIER (extra)
+_foo_register_fap extra "$TLDIR" "key_copier.fap" # extra
+# MULTI_CONVERTER
+_foo_register_fap base "$TLDIR" "multi_converter.fap"
+# POMODORO_TIMER
+_foo_register_fap extra "$TLDIR" "pomodoro_timer.fap" # extra
+# QUAC
+_foo_register_fap base "$TLDIR" "quac.fap"
+# TEXT_VIEWER
+_foo_register_fap base "$TLDIR" "text_viewer.fap"
+# TOTP
+_foo_register_fap base "$TLDIR" "totp.fap"
+# VIN_DECODER
+_foo_register_fap extra "$TLDIR" "vin_decoder.fap" # extra
+
+
+#######
+# USB #
+#######
+# mass_storage.fap
+_foo_register_fap base "$USDIR" "mass_storage.fap"
+
+
+##############################################################################################################
+# ! - EACH AND EVERY FAP SHOULD HAVE A UNZIP ENTRY ABOVE                                                     #
+##############################################################################################################
+
+
+
+# WHAT TO CLEAN
+# - FLIPPER SD (debug dir - e posterior extract from zip)
+# - ext backup (e posterior backup)
+# - UberGuidoZ (repo)
+#
+# Erase all leftovers
+function _cleanup() {
+	printf "\n"
+	warning "cleaning up..."
+
+	if (( DEBUG )) ; then
+		if [ -d "$SDDIR" ] ; then
+			rm -Rfv "$SDDIR" #2>/dev/null
+		else
+			printf "\n"
+			error "$SDDIR ${red} not found!${reset}"
+			exit 1
+		fi
+	fi
+}
+
 # Pause
 function pause() {
 	local message="$@"
@@ -196,56 +432,65 @@ function pause() {
 	read -p "$message" readEnterkey
 }
 
-function ask() {
-    	# http://djm.me/ask
-    	while true; do
-
-        	if [ "${2:-}" = "Y" ]; then
-        		prompt="Y/n"
-        		default=Y
-        	elif [ "${2:-}" = "N" ]; then
-        		prompt="y/N"
-            		default=N
-        	else
-            		prompt="y/n"
-            		default=
-        	fi
-
-        	# Ask the question
-        	question	
-        	read -p "$1 [$prompt] " REPLY
-
-        	# Default?
-        	if [ -z "$REPLY" ]; then
-        		REPLY=$default
-        	fi
-
-        	# Check if the reply is valid
-        	case "$REPLY" in
-        		Y*|y*) return 0 ;;
-        		N*|n*) return 1 ;;
-        	esac
-    	done
-}
-
 function info() {
-        printf "  ${lcyan}[i]${reset} $*${reset}\n"
+	printf " ${lcyan}[i]${reset} $*${reset}\n"
 }
 
 function success() {
-        printf " ${lgreen}[OK]${reset} $*${reset}\n"
+	printf " ${lgreen}[OK]${reset} $*${reset}\n"
 }
 
 function warning() {
-        printf "  ${lyellow}[!]${reset} $*${reset}\n"
+	printf " ${lyellow}[!]${reset} $*${reset}\n"
 }
 
 function error() {
-        printf "  ${lmagenta}err0r${reset} $*${reset}\n"
+	printf " ${lmagenta}err0r${reset} $*${reset}\n"
 }
 
 function question() {
-        printf "  ${blink_red}(?)${reset} "
+	printf " ${blink_red}(?)${reset} $*${reset}"
+}
+
+function ask() {
+   # http://djm.me/ask
+	if [ -n "$DIALOG" ]; then
+		opts=()
+		[ "$2" = "N" ] && opts+=(--defaultno)
+
+		dialog --colors --title "\Z1\Zb Please answer" "${opts[@]}" --yesno "\n$1" 7 70
+		rc=$?
+		clear
+
+		case $rc in
+			0) return 0 ;;      # Yes
+			1|255) return 1 ;;  # No ou Esc
+		esac
+	else
+		while true; do
+			if [ "${2:-}" = "Y" ]; then
+				prompt="Y/n"
+				default=Y
+			elif [ "${2:-}" = "N" ]; then
+				prompt="y/N"
+				default=N
+			else
+				prompt="y/n"
+				default=
+			fi
+
+			question
+			read -rp "$1 [$prompt] " REPLY
+
+			[ -z "$REPLY" ] && REPLY=$default
+
+			case "$REPLY" in
+				[Yy]*) return 0 ;;
+				[Nn]*) return 1 ;;
+			esac
+		done
+
+	fi
 }
 
 # Spin spin sugar
@@ -262,764 +507,402 @@ function _spinner() {
 	done
 }
 
-function _tinker-toy() {
-	echo -e "\n\t$BGTITLE${green}\n"
-	echo -e "   o--o o                      o-o"
-	echo -e "   |    | o                   o  /o"
-	echo -e "   O-o  |   o-o  o-o  o-o o-o | / |"
-	echo -e "   |    | | |  | |  | |-' |   o/  o"
-	echo -e "   o    o | O-o  O-o  o-o o    o-o"
-	echo -e "            |    |"
-	echo -e "            o    o${reset}\n"
+function _foo_suzuki() {
+	find . -name "*.py" -type f -delete -print
+	find . -name "*.docx" -type f -delete -print
+	find . -name "*.jp*" -type f -delete -print
+	find . -name "*.png" -type f -delete -print
+	find . -name "*.md" -type f -delete -print
+	find . -name "*.json" -type f -delete -print
+	rm -Rfv _Converted_
+	rm -Rfv .git*
 }
 
-function _moscow() {
-	echo -e "\n\t\t $BGTITLE${green}"
-	echo -e "     #   ##### #   # ##### ##### ##### ####  ###"
-	echo -e "    ###   #  # #  ## #   # #   # #     #   # # #"
-	echo -e "   # # #  #  # # # # #   # #   # ####  ####  # #"
-	echo -e "    ###   #  # ##  # #   # #   # #     #     # #"
-	echo -e "     #   #   # #   # #   # #   # ##### #     ###${reset}\n"
+function _foo_suzuki_subghz() {
+	cd "$EXTDIR/subghz" || exit 1
+	find . -name "*.md" -type f -delete -print
+	find . -name "*.pdf" -type f -delete -print
+	find . -name "*.jp*" -type f -delete -print
+	find . -name "*.png" -type f -delete -print
 }
 
-function _dos-rebel() {
-	echo -e "${green}"
-	echo -e "    ███████████ ████   ███"
-	echo -e "   ░░███░░░░░░█░░███  ░░░"
-	echo -e "    ░███   █ ░  ░███  ████  ████████  ████████   ██████  ████████"
-	echo -e "    ░███████    ░███ ░░███ ░░███░░███░░███░░███ ███░░███░░███░░███"
-	echo -e "    ░███░░░█    ░███  ░███  ░███ ░███ ░███ ░███░███████  ░███ ░░░"
-	echo -e "    ░███  ░     ░███  ░███  ░███ ░███ ░███ ░███░███░░░   ░███"
-	echo -e "    █████       █████ █████ ░███████  ░███████ ░░██████  █████"
-	echo -e "   ░░░░░       ░░░░░ ░░░░░  ░███░░░   ░███░░░   ░░░░░░  ░░░░░"
-	echo -e "                            ░███      ░███"
-	echo -e "                            █████     █████"
-	echo -e "                           ░░░░░     ░░░░░${reset}"
-	echo -e "\n\t\t\t\t\t$BGTITLE\n"
+function _foo_suzuki_irdb() {
+	cd "$EXTDIR/$IRDIR/IRDB" || exit 1
+	find . -name "*.jp*" -type f -delete -print
+	find . -name "*.png" -type f -delete -print
+	find . -name "*.md" -type f -delete -print
+	find . -name "*.json" -type f -delete -print
+	rm -Rfv _Converted_
+	rm -Rfv .git*
+	find . -name "*.zip" -type f -delete -print
+	find . -name "*.wav" -type f -delete -print
+	find . -name "*.*16*" -type f -delete -print
+	find . -name "*.pdf" -type f -delete -print
+	find . -name "*.raw" -type f -delete -print
+	find . -name "*.py*" -type f -delete -print
+	find . -name "*.sh" -type f -delete -print
+	find . -name "*.yml" -type f -delete -print
+	find . -name "*.css" -type f -delete -print
+	find . -name "*.html" -type f -delete -print
+	find . -name "*.git" -type f -delete -print
+	find . -name "*.cu8" -type f -delete -print
+	find . -name "*.txt" -type f -delete -print
+	find . -name "*.mp4" -type f -delete -print
+	find . -name "*.mov" -type f -delete -print
 }
 
-function _bloody() {
-	echo -e "${green}"
-	echo -e "     █████▒██▓     ██▓ ██▓███   ██▓███  ▓█████  ██▀███"
-	echo -e "   ▓██   ▒▓██▒    ▓██▒▓██░  ██▒▓██░  ██▒▓█   ▀ ▓██ ▒ ██▒"
-	echo -e "   ▒████ ░▒██░    ▒██▒▓██░ ██▓▒▓██░ ██▓▒▒███   ▓██ ░▄█ ▒"
-	echo -e "   ░▓█▒  ░▒██░    ░██░▒██▄█▓▒ ▒▒██▄█▓▒ ▒▒▓█  ▄ ▒██▀▀█▄"
-	echo -e "   ░▒█░   ░██████▒░██░▒██▒ ░  ░▒██▒ ░  ░░▒████▒░██▓ ▒██▒"
-	echo -e "    ▒ ░   ░ ▒░▓  ░░▓  ▒▓▒░ ░  ░▒▓▒░ ░  ░░░ ▒░ ░░ ▒▓ ░▒▓░"
-	echo -e "    ░     ░ ░ ▒  ░ ▒ ░░▒ ░     ░▒ ░      ░ ░  ░  ░▒ ░ ▒░"
-	echo -e "    ░ ░     ░ ░    ▒ ░░░       ░░          ░     ░░   ░"
-	echo -e "              ░  ░ ░                       ░  ░   ░${reset}"
-	echo -e "\n\t\t\t\t$BGTITLE\n"
+function _foo_suzuki_fap() {
+	ask "erase all your previous Flipper Application Files (FAPs)?" Y || {
+		_foo_msg_error "aborted"
+		return 1 # check this condititon later
+	}
+
+	[[ -d "$APDIR" ]] || {
+		error "$APDIR directory not found!"
+		return 1
+	}
+
+	if ! find "$APDIR" -type f -name "*.fap" -print -quit | grep -q .; then
+		printf "\n"
+		info "no previous FAPs files found."
+		return 0
+	fi
+
+	printf "\n"
+	warning "cleaning old FAP files"
+	find "$APDIR" -type f -name "*.fap" -print -delete
 }
 
-function _poison() {
-	echo -e "${green}"
-	echo -e "   @@@@@@@@  @@@       @@@  @@@@@@@   @@@@@@@   @@@@@@@@  @@@@@@@"
-	echo -e "   @@@@@@@@  @@@       @@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@"
-	echo -e "   @@!       @@!       @@!  @@!  @@@  @@!  @@@  @@!       @@!  @@@"
-	echo -e "   !@!       !@!       !@!  !@!  @!@  !@!  @!@  !@!       !@!  @!@"
-	echo -e "   @!!!:!    @!!       !!@  @!@@!@!   @!@@!@!   @!!!:!    @!@!!@!"
-	echo -e "   !!!!!:    !!!       !!!  !!@!!!    !!@!!!    !!!!!:    !!@!@!"
-	echo -e "   !!:       !!:       !!:  !!:       !!:       !!:       !!: :!!"
-	echo -e "   :!:        :!:      :!:  :!:       :!:       :!:       :!:  !:!"
-	echo -e "    ::        :: ::::   ::   ::        ::        :: ::::  ::   :::"
-	echo -e "    :        : :: : :  :     :         :        : :: ::    :   : :${reset}\n"
-	echo -e "\t\t\t\t\t$BGTITLE\n"
+function _foo_suzuki_totp() {
+	local -a files
+
+	ask "erase all your previous totp plugins?" Y || {
+		_foo_msg_error "aborted"
+		return 1 # check this condititon later
+	}
+
+	[[ -d "$APDDIR/totp/plugins" ]] || {
+		error "$APDDIR/totp/plugins directory not found!"
+		return 1
+	}
+
+	mapfile -t files < <(
+		find "$APDDIR/totp/plugins" -type f -name "*.fal"
+	)
+
+	if (( ${#files[@]} == 0 )); then
+		printf "\n"
+		info "no previous TOTP plugins found."
+		return 0
+	fi
+
+	printf "\n"
+	warning "cleaning previous totp plugins"
+	#printf '%s\n' "${files[@]}"
+	rm -Rfv "${files[@]}"
 }
 
-function _caligraphy2() {
-	echo -e "\t\t\t\t\t\t$BGTITLE${green}"
-	echo -e "        ##### ##   ###"
-	echo -e "     ######  /### / ###    #"
-	echo -e "    /#   /  /  ##/   ##   ###"
-	echo -e "   /    /  /    #    ##    #"
-	echo -e "       /  /          ##"
-	echo -e "      ## ##          ##  ###        /###     /###     /##  ###  /###"
-	echo -e "      ## ##          ##   ###      / ###  / / ###  / / ###  ###/ #### /"
-	echo -e "      ## ######      ##    ##     /   ###/ /   ###/ /   ###  ##   ###/"
-	echo -e "      ## #####       ##    ##    ##    ## ##    ## ##    ### ##"
-	echo -e "      ## ##          ##    ##    ##    ## ##    ## ########  ##"
-	echo -e "      #  ##          ##    ##    ##    ## ##    ## #######   ##"
-	echo -e "         #           ##    ##    ##    ## ##    ## ##        ##"
-	echo -e "     /####           ##    ##    ##    ## ##    ## ####    / ##"
-	echo -e "    /  #####         ### / ### / #######  #######   ######/  ###"
-	echo -e "   /    ###           ##/   ##/  ######   ######     #####    ###"
-	echo -e "   #                             ##       ##"
-	echo -e "    ##                           ##       ##"
-	echo -e "                                 ##       ##"
-	echo -e "                                  ##       ##${reset}\n"
+function _foo_suzuki_amiibo() {
+	find . -name "*.py" -type f -delete -print
+	find . -name "*.docx" -type f -delete -print
 }
 
-function _splash() {
-	let "SPLASH = $RANDOM % 6 +1";
-	case $SPLASH in
-		1)
-			_tinker-toy
-			;;
-		2)
-			_moscow
-			;;
-		3)
-			_dos-rebel
-			;;
-		4)
-			_bloody
-			;;
-		5)
-			_poison
-			;;
-		6)
-			_caligraphy2
-			;;
-		*)
-			echo -e "\n$BGTITLE"
+function _foo_msg_error() {
+	if [ -n "$DIALOG" ] ; then
+		dialog --colors --title "\Z1\Zb error " --msgbox "\n$1!" 7 70
+		clear
+	else
+		printf "\n"
+		error "${red}$1!${reset}"
+	fi
+}
+
+# generic helpers
+function _get_latest_release() {
+    curl -fsSL "https://api.github.com/repos/$1/releases/latest"
+}
+
+function _json() {
+    jq -r "$1"
+}
+
+function _download_file() {
+	local url="$1"
+	local out="$2"
+	if [ -n "$DIALOG" ]; then
+		local size
+		size=$(wget --spider "$url" 2>&1 | awk '/Length:/ {print $2}')
+		if [ -z "$size" ]; then
+			dialog --msgbox "Failed to get size for:\n$out" 7 50
+			return 1
+		fi
+		( wget -qO- "$url" | pv -n -s "$size" > "$out" ) 2>&1 | dialog --title " downloading " --gauge "\n$out" 8 70 0
+		local rc=${PIPESTATUS[0]}
+		clear
+		if [ "$rc" -ne 0 ]; then
+			dialog --msgbox "Download failed:\n$out" 7 50
+			rm -f "$out"
+			return 1
+		fi
+	else
+		printf "\n"
+		info "downloading $out"
+		if ! curl -fL --progress-bar -o "$out" "$url"; then
+			error "Failed downloading $out"
+			rm -f "$out"
+			return 1
+		fi
+		success "$out downloaded"
+	fi
+	return 0
+}
+
+function _foo_get_ufw() {
+	local release
+	local version
+	local body
+	local api
+
+	release=$(_get_latest_release "DarkFlippers/unleashed-firmware")
+	version=$(printf '%s\n' "$release" | _json '.tag_name')
+	body=$(printf '%s\n' "$release" | _json '.body')
+	api=$(printf '%s\n' "$body" | sed -n 's/.*Current API:[[:space:]]*\([0-9][0-9.]*\).*/\1/p')
+
+	if ask "download $version (API $api) files?" N; then
+		cd "$FWDIR" || exit 1
+		if [[ -f "$FWDIR/flipper-z-f7-update-$version.tgz" || -f "$FWDIR/flipper-z-f7-update-${version}c.tgz" || -f "$FWDIR/flipper-z-f7-update-${version}e.tgz" ]] ; then
+			printf "\n"
+			if ask "erase local files?" N; then
+				printf "\n"
+				warning "erasing local files"
+				rm -Rfv "flipper-z-f7-update-${version}"* # globs lol
+			fi
+			# else abort
+		fi
+		_foo_download_ufw "$version"
+	fi
+}
+
+function _foo_download_ufw() {
+	local version="$1"
+	local base="https://github.com/DarkFlippers/unleashed-firmware"
+	for build in "" c e; do
+		_download_file "$base/releases/download/$version/flipper-z-f7-update-$version${build}.tgz" "flipper-z-f7-update-$version${build}.tgz"
+	done
+}
+
+function _foo_get_apps() {
+	local release
+	local tag
+	local body
+	local api
+
+	release=$(_get_latest_release "xMasterX/all-the-plugins")
+	tag=$(printf '%s\n' "$release" | _json '.tag_name')
+	body=$(printf '%s\n' "$release" | _json '.body')
+	api=$(printf '%s\n' "$body" | sed -n 's/.*API version:[[:space:]]*\([0-9][0-9.]*\).*/\1/p')
+
+	if ask "download $tag (API $api) files?" N; then
+		cd "$FWDIR" || exit 1
+		if [[ -f "$FWDIR/all-the-apps-base.zip" || -f "$FWDIR/all-the-apps-extra.zip" ]] ; then
+			printf "\n"
+			if ask "erase local $tag files?" N; then
+				printf "\n"
+				warning "erasing local $tag files"
+				rm -Rfv "all-the-apps"* # globs lol
+			fi
+			# else abort
+		fi
+		_foo_download_apps "$tag"
+	fi
+}
+
+function _foo_download_apps() {
+	local tag="$1"
+	local base="https://github.com/xMasterX/all-the-plugins"
+	for pack in base extra; do
+		_download_file "$base/releases/download/$tag/all-the-apps-${pack}.zip" "all-the-apps-${pack}.zip"
+	done
+}
+
+function _foo_copy_dir_contents() {
+	local src="$1"
+	local dst="$2"
+	local name="$3"
+
+	[[ -d "$src" ]] || return
+	[[ -d "$dst" ]] || return
+
+	mapfile -t files < <(find "$src" -mindepth 1 -type f)
+
+	# ((${#files[@]})) || return
+	if (( ${#files[@]} == 0 )); then
+		printf "\n"
+		info "$name: nothing to copy"
+		return
+	fi
+
+	printf "\n"
+	info "copying $name files"
+	cp -Rfv "$src"/. "$dst"/
+	success "$name files copied"
+}
+
+function _foo_copy_dir() {
+	local src="$1"
+	local dst="$2"
+	local name="$3"
+
+	[[ -d "$src" ]] || return
+
+	mapfile -t files < <(find "$src" -mindepth 1 -type f)
+
+	# (( ${#files[@]} )) || return
+	if (( ${#files[@]} == 0 )); then
+		printf "\n"
+		info "$name: nothing to copy"
+		return
+	fi
+
+	printf "\n"
+	info "copying $name directory"
+	cp -Rfv "$src" "$dst"/
+	success "$name directory copied"
+}
+
+function _foo_copy_special_assets() {
+    _foo_copy_dir "$APDDIR/totp"            "$SDDIR/apps_data" "totp"
+    _foo_copy_dir "$APDDIR/fordradiocodes"  "$SDDIR/apps_data" "fordradiocodes"
+    _foo_copy_dir "$EXTDIR/pocsag"          "$SDDIR"           "pocsag"
+    _foo_copy_dir "$EXTDIR/tama_p1"         "$SDDIR"           "tama_p1"
+}
+
+function _foo_post_copy_hook() {
+	local fap="$1"
+	case "$fap" in
+		totp.fap)
+			if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$TLDIR" && -d "$APDDIR/totp/plugins" ]] ; then
+				#unzip -o -j $FWDIR/$BASEZFILE $TOTPFILEDIR/totp/plugins/* -d $APDDIR/totp/plugins
+				unzip -oj "$FWDIR/$BASEZFILE" "$TOTPFILEDIR/totp/plugins/*" -d "$APDDIR/totp/plugins"
+			fi
 			;;
 	esac
 }
 
-# Chaotic evil sign-off
-function _signoff() {
-	echo -e "\nciao."
-}
+# _foo_cp_* refactor
+function _foo_copy_fap() {
+	local pack="$1"     # base|extra
+	local category="$2" # GPIO, Games...
+	local fap="$3"
 
-#
-# me·tic·u·lous·ly lock and unlock then performs full erase on device partitions
-#
-# i'm a good man and thorough
-#
+	local zip filedir
 
-#
-#function _dir_deploy() {
-# make it check if dir exists if not crreate it
-#}
+	case "$pack" in
+	base)
+		zip="$BASEZFILE"
+		filedir="$BASEFILEDIR"
+		;;
+	extra)
+		zip="$EXTRAZFILE"
+		filedir="$EXTRAFILEDIR"
+		;;
+	*)
+		error "unknown pack: $pack"
+		return 1
+		;;
+	esac
 
-# WHAT TO CLEAN
-# - FLIPPER SD (debug dir - e posterior extract from zip)
-# - ext backup (e posterior backup)
-# - UberGuidoZ (repo)
-#
-# Erase all leftovers
-function _cleanup() {
-	printf "\n"
+	[[ -f "$FWDIR/$zip" ]] || {
+	    warning "$zip not found"
+	    return
+	}
 
-	info "cleaning..."
+	[[ -d "$APDIR/$category" ]] || {
+	    warning "$category not found"
+	    return
+	}
 
-	if [ -v DEBUG ] ; then
-		if [ -d "$SDDIR" ] ; then
-			rm -Rf "$SDDIR" 2>/dev/null
-		else
-			printf "\n"
-
-			error "$SDDIR ${red} not found!${reset}"
-			exit 1
-		fi
+	if unzip -oj "$FWDIR/$zip" "$filedir/$category/$fap" -d "$APDIR/$category" ; then
+		_foo_post_copy_hook "$fap" "$pack"
+	else
+		warning "$fap extraction failed"
 	fi
 }
 
-function _foo_suzuki() {
-	find . -name "*.py" -type f -delete
-	find . -name "*.docx" -type f -delete
-	find . -name "*.jp*" -type f -delete
-	find . -name "*.png" -type f -delete
-	find . -name "*.md" -type f -delete
-	find . -name "*.json" -type f -delete
-	rm -Rfv _Converted_
-	rm -Rfv .git*
+# for copying registered faps
+function _foo_copy_registered_faps() {
+	local item pack dir file
+	for item in "${FAPS[@]}"; do
+		IFS='|' read -r pack dir file <<< "$item"
+		_foo_copy_fap "$pack" "$dir" "$file"
+	done
 }
 
-
-function _foo_suzuki_irdb() {
-	cd "$EXTDIR/subghz" || return 1
-	find . -name "*.md" -type f -delete
-	find . -name "*.pdf" -type f -delete
-	find . -name "*.jp*" -type f -delete
-	find . -name "*.png" -type f -delete
-}
-
-function _foo_suzuki_subghz() {
-	cd "$EXTDIR/infrared/IRDB" || return 1
-	find . -name "*.jp*" -type f -delete
-	find . -name "*.png" -type f -delete
-	find . -name "*.md" -type f -delete
-	find . -name "*.json" -type f -delete
-	rm -Rfv _Converted_
-	rm -Rfv .git*
-	find . -name "*.zip" -type f -delete
-	find . -name "*.wav" -type f -delete
-	find . -name "*.*16*" -type f -delete
-	find . -name "*.pdf" -type f -delete
-	find . -name "*.raw" -type f -delete
-	find . -name "*.py*" -type f -delete
-	find . -name "*.sh" -type f -delete
-	find . -name "*.yml" -type f -delete
-	find . -name "*.css" -type f -delete
-	find . -name "*.html" -type f -delete
-	find . -name "*.git" -type f -delete
-	find . -name "*.cu8" -type f -delete
-	find . -name "*.txt" -type f -delete
-	find . -name "*.mp4" -type f -delete
-	find . -name "*.mov" -type f -delete
-}
-
-function _foo_suzuki_fap() {
-	cd "$APDIR" || return 1
-	warning "this will erase all your previous fap"
-	if ask "are you sure?" Y; then
-		printf "\n"
-		info "cleaning old fap files"
-		find . -name "*.fap" -type f -delete
-		success "done"
-	fi
-}
-
-function _foo_suzuki_totp() {
-	cd "$APDDIR/totp/plugins" || return 1
-	warning "this will erase all your previous totp plugins"
-	if ask "are you sure?" Y; then
-		printf "\n"
-		info "cleaning old totp plugins"
-		find . -name "*.fal" -type f -delete
-		success "done"
-	fi
-}
-
-function _foo_suzuki_amiibo() {
-	find . -name "*.py" -type f -delete
-	find . -name "*.docx" -type f -delete
-}
-
-
-##########################################################
-# ! - EACH AND EVERY FAP SHOULD HAVE A UNZIP ENTRY BELOW #
-##########################################################
-
-#############
-# Bluetooth #
-#############
-# BLE_SPAM
-function _foo_cp_ble_spam_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$BLDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$BLDIR/$BLE_SPAM -d $APDIR/$BLDIR
-	fi
-}
-
-
-#########
-# Games #
-#########
-# TAMA_P1
-function _foo_cp_tama_p1_fap() {
-	if [[ -f "$FWDIR/$EXTRAZFILE" && -d "$APDIR/$GMDIR" ]] ; then
-		#unzip -o -j $WORKDIR/fw/all-the-apps-extra.zip extra_pack_build/artifacts-extra/Games/tama_p1.fap -d $WORKDIR/ext/apps/Games/
-		unzip -o -j $FWDIR/$EXTRAZFILE $EXTRAFILEDIR/$GMDIR/$TAMA_P1 -d $APDIR/$GMDIR
-	fi
-}
-
-# SNAKE20
-function _foo_cp_snake20_fap() {
-	if [[ -f "$FWDIR/$EXTRAZFILE" && -d "$APDIR/$GMDIR" ]] ; then
-		unzip -o -j $FWDIR/$EXTRAZFILE $EXTRAFILEDIR/$GMDIR/$SNAKE20 -d $APDIR/$GMDIR
-	fi
-}
-
-# T_REX_RUNNER
-function _foo_cp_t_rex_runner_fap() {
-	if [[ -f "$FWDIR/$EXTRAZFILE" && -d "$APDIR/$GMDIR" ]] ; then
-		unzip -o -j $FWDIR/$EXTRAZFILE $EXTRAFILEDIR/$GMDIR/$T_REX_RUNNER -d $APDIR/$GMDIR
-	fi
-}
-
-
-########
-# GPIO #
-########
-# I2CTOOLS
-function _foo_cp_i2ctools_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$GPDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$GPDIR/$I2CTOOLS -d $APDIR/$GPDIR
-	fi
-}
-
-# LIGHTMETER
-function _foo_cp_lightmeter_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$GPDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$GPDIR/$LIGHTMETER -d $APDIR/$GPDIR
-	fi
-}
-
-# NRF24_MOUSE_JACKER
-function _foo_cp_nrf24_mouse_jacker_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$GPDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$GPDIR/$NRF24_MOUSE_JACKER -d $APDIR/$GPDIR
-	fi
-}
-
-# NRF24_SNIFFER
-function _foo_cp_nrf24_sniffer_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$GPDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$GPDIR/$NRF24_SNIFFER -d $APDIR/$GPDIR
-	fi
-}
-
-# SIGNAL_GENERATOR
-function _foo_cp_signal_generator_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$GPDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$GPDIR/$SIGNAL_GENERATOR -d $APDIR/$GPDIR
-	fi
-}
-
-# SPI_MEM_MANAGER
-function _foo_cp_spi_mem_manager_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$GPDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$GPDIR/$SPI_MEM_MANAGER -d $APDIR/$GPDIR
-	fi
-}
-
-# UART_TERMINAL
-function _foo_cp_uart_terminal_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$GPDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$GPDIR/$UART_TERMINAL -d $APDIR/$GPDIR
-	fi
-}
-
-# UNITEMP
-function _foo_cp_unitemp_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$GPDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$GPDIR/$UNITEMP -d $APDIR/$GPDIR
-	fi
-}
-
-
-###########
-# iButton #
-###########
-# FUZZER_IBTN
-function _foo_cp_fuzzer_ibtn_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$IBDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$IBDIR/$FUZZER_IBTN -d $APDIR/$IBDIR
-	fi
-}
-
-# IBUTTON_CONVERTER
-function _foo_cp_ibutton_converter_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$IBDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$IBDIR/$IBUTTON_CONVERTER -d $APDIR/$IBDIR
-	fi
-}
-
-
-############
-# Infrared #
-############
-# IR_SCOPE
-function _foo_cp_ir_scope_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$IRDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$IRDIR/$IR_SCOPE -d $APDIR/$IRDIR
-	fi
-}
-
-
-#########
-# Media #
-#########
-# METRONOME
-function _foo_cp_metronome_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$MDDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$MDDIR/$METRONOME -d $APDIR/$MDDIR
-	fi
-}
-
-# MORSE_CODE
-function _foo_cp_morse_code_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$MDDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$MDDIR/$MORSE_CODE -d $APDIR/$MDDIR
-	fi
-}
-
-# MUSIC_PLAYER
-function _foo_cp_music_player_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$MDDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$MDDIR/$MUSIC_PLAYER -d $APDIR/$MDDIR
-	fi
-}
-
-# WAV_PLAYER
-function _foo_cp_wav_player_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$MDDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$MDDIR/$WAV_PLAYER -d $APDIR/$MDDIR
-	fi
-}
-
-
-#######
-# NFC #
-#######
-# MFC_EDITOR
-function _foo_cp_mfc_editor_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$NFDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$NFDIR/$MFC_EDITOR -d $APDIR/$NFDIR
-	fi
-}
-
-# NFC_EINK
-function _foo_cp_nfc_eink_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$NFDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$NFDIR/$NFC_EINK -d $APDIR/$NFDIR
-	fi
-}
-
-# NFC_MAGIC
-function _foo_cp_nfc_magic_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$NFDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$NFDIR/$NFC_MAGIC -d $APDIR/$NFDIR
-	fi
-}
-
-# NFC_MAKER
-function _foo_cp_nfc_maker_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$NFDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$NFDIR/$NFC_MAKER -d $APDIR/$NFDIR
-	fi
-}
-
-# PICOPASS
-function _foo_cp_picopass_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$NFDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$NFDIR/$PICOPASS -d $APDIR/$NFDIR
-	fi
-}
-
-########
-# RFID #
-########
-# FUZZER_RFID
-function _foo_cp_fuzzer_rfid_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$RFDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$RFDIR/$FUZZER_RFID -d $APDIR/$RFDIR
-	fi
-}
-
-###########
-# Sub-GHz #
-###########
-# FLIPPER_SHARE
-function _foo_cp_flipper_share_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$SBDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$SBDIR/$FLIPPER_SHARE -d $APDIR/$SBDIR
-	fi
-}
-
-# POCSAG_PAGER
-function _foo_cp_pocsag_pager_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$SBDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$SBDIR/$POCSAG_PAGER -d $APDIR/$SBDIR
-		# also copy additional settings at /pocsag
-	fi
-}
-
-# RADIO_SCANNER
-function _foo_cp_radio_scanner_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$SBDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$SBDIR/$RADIO_SCANNER -d $APDIR/$SBDIR
-	fi
-}
-
-# SPECTRUM_ANALYZER
-function _foo_cp_spectrum_analyzer_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$SBDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$SBDIR/$SPECTRUM_ANALYZER -d $APDIR/$SBDIR
-	fi
-}
-
-# SUBGHZ_BRUTEFORCER
-function _foo_cp_subghz_bruteforcer_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$SBDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$SBDIR/$SUBGHZ_BRUTEFORCER -d $APDIR/$SBDIR
-	fi
-}
-
-# SUBGHZ_PLAYLIST
-function _foo_cp_subghz_playlist_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$SBDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$SBDIR/$SUBGHZ_PLAYLIST -d $APDIR/$SBDIR
-	fi
-}
-
-# SUBGHZ_SCHEDULER
-function _foo_cp_subghz_scheduler_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$SBDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$SBDIR/$SUBGHZ_SCHEDULER -d $APDIR/$SBDIR
-	fi
-}
-
-# WEATHER_STATION
-function _foo_cp_weather_station_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$SBDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$SBDIR/$WEATHER_STATION -d $APDIR/$SBDIR
-	fi
-}
-
-
-#########
-# Tools #
-#########
-# BARCODE_APP
-function _foo_cp_barcode_app_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$TLDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$TLDIR/$BARCODE_APP -d $APDIR/$TLDIR
-	fi
-}
-
-# DTMF_DOLPHIN
-function _foo_cp_dtmf_dolphin_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$TLDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$TLDIR/$DTMF_DOLPHIN -d $APDIR/$TLDIR
-	fi
-}
-
-# HEX_VIEWER
-function _foo_cp_hex_viewer_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$TLDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$TLDIR/$HEX_VIEWER -d $APDIR/$TLDIR
-	fi
-}
-
-# MULTI_CONVERTER
-function _foo_cp_multi_converter_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$TLDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$TLDIR/$MULTI_CONVERTER -d $APDIR/$TLDIR
-	fi
-}
-
-# NFC_RFID_DETECTOR
-function _foo_cp_nfc_rfid_detector_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$TLDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$TLDIR/$NFC_RFID_DETECTOR -d $APDIR/$TLDIR
-	fi
-}
-
-# QUAC
-function _foo_cp_quac_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$TLDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$TLDIR/$QUAC -d $APDIR/$TLDIR
-	fi
-}
-
-# TEXT_VIEWER
-function _foo_cp_text_viewer_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$TLDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$TLDIR/$TEXT_VIEWER -d $APDIR/$TLDIR
-	fi
-}
-
-# KEY_COPIER
-function _foo_cp_key_copier_fap() {
-	if [[ -f "$FWDIR/$EXTRAZFILE" && -d "$APDIR/$TLDIR" ]] ; then
-		unzip -o -j $FWDIR/$EXTRAZFILE $EXTRAFILEDIR/$TLDIR/$KEY_COPIER -d $APDIR/$TLDIR
-	fi
-}
-
-# TOTP
-function _foo_cp_totp_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$TLDIR" && -d "$APDDIR/totp/plugins" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$TLDIR/$TOTP -d $APDIR/$TLDIR
-		printf "\n"
-		unzip -o -j $FWDIR/$BASEZFILE $TOTPFILEDIR/totp/plugins/* -d $APDDIR/totp/plugins
-	fi
-}
-
-
-#######
-# USB #
-#######
-# MASS_STORAGE
-function _foo_cp_mass_storage_fap() {
-	if [[ -f "$FWDIR/$BASEZFILE" && -d "$APDIR/$USDIR" ]] ; then
-		unzip -o -j $FWDIR/$BASEZFILE $BASEFILEDIR/$USDIR/$MASS_STORAGE -d $APDIR/$USDIR
-	fi
-}
-
-##########################################################
-# ! - EACH AND EVERY FAP SHOULD HAVE A UNZIP ENTRY ABOVE #
-##########################################################
-
-
-#########################################################
-# ! - EACH AND EVERY FAP SHOULD HAVE A COPY ENTRY BELOW #
-#########################################################
+# for copying newly released faps
 function _foo_unzip_to_ext() {
-	# check if dir is not empty
-	_foo_suzuki_fap
-	printf "\n"
+	# Move to the working dir
+	cd $WORKDIR || exit 1
 
-	# check if dir is empty
-	_foo_suzuki_totp
-	printf "\n"
-
-	warning "this will copy new firmware version from released zip files"
-	printf "\n"
-	if ask "ready to extract Flipper Application Files (FAPs)?" Y; then
+	if [[ ! -d "$WORKDIR" ]]; then
+		_foo_dir_bootstrap
+		_foo_dir_dbootstrap
+		_foo_get_apps
+	else
+		_foo_get_apps
 		printf "\n"
-		info "extracting Flipper Application Files (FAPs)"
-		#############
-		# Bluetooth #
-		#############
-		if [ -v BLDIR ] ; then
-			for fapname in BLE_SPAM; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
+		_foo_suzuki_fap
+		printf "\n"
+		_foo_suzuki_totp
+	fi
 
-		#########
-		# Games #
-		#########
-		if [ -v GMDIR ] ; then
-			for fapname in TAMA_P1 SNAKE20 T_REX_RUNNER; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
-
-		########
-		# GPIO #
-		########
-		if [ -v GPDIR ] ; then
-			for fapname in I2CTOOLS LIGHTMETER NRF24_MOUSE_JACKER NRF24_SNIFFER SIGNAL_GENERATOR SPI_MEM_MANAGER UART_TERMINAL UNITEMP; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
-
-		###########
-		# iButton #
-		###########
-		if [ -v IBDIR ] ; then
-			for fapname in FUZZER_IBTN IBUTTON_CONVERTER; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
-
-		############
-		# Infrared #
-		############
-		if [ -v IRDIR ] ; then
-			for fapname in IR_SCOPE; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
-
-		#########
-		# Media #
-		#########
-		if [ -v MDDIR ] ; then
-			for fapname in METRONOME MORSE_CODE MUSIC_PLAYER WAV_PLAYER; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
-
-		#######
-		# NFC #
-		#######
-		if [ -v NFDIR ] ; then
-			for fapname in MFC_EDITOR NFC_EINK NFC_MAGIC NFC_MAKER PICOPASS; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
-
-		########
-		# RFID #
-		########
-		if [ -v RFDIR ] ; then
-			for fapname in FUZZER_RFID; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
-
-		###########
-		# Sub-GHz #
-		###########
-		if [ -v SBDIR ] ; then
-			for fapname in FLIPPER_SHARE POCSAG_PAGER RADIO_SCANNER SPECTRUM_ANALYZER SUBGHZ_BRUTEFORCER SUBGHZ_PLAYLIST SUBGHZ_SCHEDULER WEATHER_STATION; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
-
-		#########
-		# Tools #
-		#########
-		if [ -v TLDIR ] ; then
-			for fapname in BARCODE_APP DTMF_DOLPHIN HEX_VIEWER MULTI_CONVERTER NFC_RFID_DETECTOR QUAC TEXT_VIEWER KEY_COPIER TOTP; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
-
-		#######
-		# USB #
-		#######
-		if [ -v USDIR ] ; then
-			for fapname in MASS_STORAGE; do
-				if [ -v ${fapname} ] ; then
-					_foo_cp_${fapname,,}_fap
-				fi
-			done
-			printf "\n"
-		fi
-
-		success "done extracting Flipper Application Files (FAPs)"
+	printf "\n"
+	if ask "extract FAPs from newly released zip files?" Y; then
+		printf "\n"
+		warning "extracting FAPs from newly released zip files"
+		_foo_copy_registered_faps
+		success "Flipper Application Files (FAPs) extracted"
+	else
+		_foo_msg_error "aborted"
+		exit 1
 	fi
 }
-#########################################################
-# ! - EACH AND EVERY FAP SHOULD HAVE A COPY ENTRY ABOVE #
-#########################################################
 
-# deploy to sdcard
+# deploy local ext copy to sdcard
 function _foo_deploy_to_sd() {
-	warning "this will transfer files to your sd card (make sure it's mounted)"
+	# Move to the working dir
+	cd $WORKDIR || exit 1
 
-	printf "\n"
-	# check for destination dir
 	if [ -d "$SDDIR" ] ; then
-		if ask "ready to copy Flipper Application Files (FAPs)?" Y; then
+		if ask "deploy FAPs to the sd card?" Y; then
 			printf "\n"
-			info "copying FAPs"
+			warning "copying FAPs"
 			# copy whole local ext structure to sd card
-			for fapcat in ${BLDIR} ${GMDIR} ${GPDIR} ${IBDIR} ${IRDIR} ${NFDIR} ${RFDIR} ${SBDIR} ${TLDIR} ${USDIR}; do
-				# check for fap category, source and destination and if there's content
-				if [[ -d "$EXTDIR/apps/${fapcat}" && -d "$SDDIR/apps/${fapcat}" ]] \
-				   && find "$EXTDIR/apps/${fapcat}" -mindepth 1 -type f -print -quit | read -r _; then
+			local -a categories=(
+			    "$BLDIR"
+			    "$GMDIR"
+			    "$GPDIR"
+			    "$IBDIR"
+			    "$IRDIR"
+			    "$NFDIR"
+			    "$RFDIR"
+			    "$SBDIR"
+			    "$TLDIR"
+			    "$USDIR"
+			)
+			for fapcat in "${categories[@]}"; do
+				if [[ -d "$EXTDIR/apps/$fapcat" && -d "$SDDIR/apps/${fapcat}" ]] ; then
+				   	src="$EXTDIR/apps/$fapcat"
+				   	dst="$SDDIR/apps/$fapcat"
+				   	[[ -d "$src" ]] || continue
+				   	#mkdir -p "$dst"
+				   	find "$src" -mindepth 1 -type f -print -quit | read -r _ || continue
 					printf "\n"
 					warning "copying ${fapcat} FAPs"
-					# Erro lógico: glob dentro de aspas
-					cp -Rfv "$EXTDIR/apps/${fapcat}/"* "$SDDIR/apps/${fapcat}/"
-					success "done copying ${fapcat} FAPs"
+					if cp -iRfv "$EXTDIR/apps/$fapcat/"* "$SDDIR/apps/$fapcat/"; then # Erro lógico: glob dentro de aspas
+						success "done copying $fapcat FAPs"
+					else
+						error "failed copying $fapcat FAPs"
+					fi
 				fi
 			done
 
@@ -1037,77 +920,35 @@ function _foo_deploy_to_sd() {
 		fi
 
 		printf "\n"
-		if ask "ready to copy additional files?" Y; then
+		pause
+		# copy library
+		if ask "deploy additional files to the sd card?" Y; then
 			printf "\n"
-			info "copying additional files"
-			# copy all files
-			for addfil in badusb infrared music_player nfc subghz subplaylist; do
-				if [[ -d "$EXTDIR/${addfil}" && -d "$SDDIR/${addfil}" ]] \
-				   && find "$EXTDIR/${addfil}" -mindepth 1 -type f -print -quit | read -r _; then
-					printf "\n"
-					info "copying ${addfil} files"
-					# Erro lógico: glob dentro de aspas
-					cp -Rfv "$EXTDIR/${addfil}/"* "$SDDIR/${addfil}/"
-					success "done copying ${addfil} files"
-				fi
+			warning "copying additional files"
+			for dir in badusb infrared music_player nfc subghz subplaylist; do
+				_foo_copy_dir_contents \
+					"$EXTDIR/$dir" \
+					"$SDDIR/$dir" \
+					"$dir"
 			done
 
-			# copy whole dir
-			for adddir in subghz_remote; do
-				if [[ -d "$EXTDIR/${adddir}" && -d "$SDDIR" ]] \
-				   && find "$EXTDIR/${adddir}" -mindepth 1 -type f -print -quit | read -r _; then
-					printf "\n"
-					info "copying ${adddir} dir"
-					cp -Rfv "$EXTDIR/${adddir}" "$SDDIR/"
-					success "done copying ${adddir} dir"
-				fi
+			for dir in subghz_remote; do
+				_foo_copy_dir \
+					"$EXTDIR/$dir" \
+					"$SDDIR" \
+					"$dir"
 			done
+			_foo_copy_special_assets
 			printf "\n"
-			success "done copying additional files"
-		fi
-
-		# check for fap
-		if [ -v POCSAG_PAGER ] ; then
-			for pocsagdir in pocsag; do
-				if [[ -d "$EXTDIR/${pocsagdir}" && -d "$SDDIR" ]] \
-				   && find "$EXTDIR/${pocsagdir}" -mindepth 1 -type f -print -quit | read -r _; then
-					printf "\n"
-					info "copying ${pocsagdir} dir"
-					cp -Rfv "$EXTDIR/${pocsagdir}" "$SDDIR/"
-					success "done copying ${pocsagdir} dir"
-				fi
-			done
-		fi
-
-		# check for fap
-		if [ -v TAMA_P1 ] ; then
-			for tamadir in tama_p1; do
-				if [[ -d "$EXTDIR/${tamadir}" && -d "$SDDIR" ]] \
-				   && find "$EXTDIR/${tamadir}" -mindepth 1 -type f -print -quit | read -r _; then
-					printf "\n"
-					info "copying ${tamadir} dir"
-					cp -Rfv "$EXTDIR/${tamadir}" "$SDDIR/"
-					success "done copying ${tamadir} dir"
-				fi
-			done
-		fi
-
-		# check for fap
-		if [ -v TOTP ] ; then
-			for totpdir in totp; do
-				if [[ -d "$APDDIR/$totpdir/plugins" && -d "$SDDIR/apps_data" ]] \
-				   && find "$APDDIR/${totpdir}/plugins" -mindepth 1 -type f -print -quit | read -r _; then
-					printf "\n"
-					info "copying ${totpdir} dir"
-					cp -Rfv "$APDDIR/${totpdir}" "$SDDIR/apps_data/"
-					success "done copying ${totpdir} dir"
-				fi
-			done
+			success "additional files copied"
 		fi
 	else
-		printf "\n"
-
-		error "$SDDIR ${red} not found!${reset}"
+		if [ -n "$DIALOG" ] ; then
+			dialog --colors --title "\Z1\Zb error " --msgbox "\n$ZFILE \Z1file not found!" 7 70
+			clear
+		else
+			error "$ZFILE ${red}file not found!${reset}"
+		fi
 		exit 1
 	fi
 }
@@ -1150,107 +991,60 @@ function _foo_cp_irdb() {
 
 	if [[ -d "$UWORKDIR/.git" ]] ; then
 		if [[ -d "$EXTDIR/infrared/IRDB" ]] ; then
-			warning "this will erase all your previous $IRDIR files"
-			if ask "are you sure?" Y; then
-				info "erasing old $IRDIR files"
-				rm -Rfv "$WORKDIR/ext/infrared/IRDB"
-				success "done erasing $IRDIR files"
+			# warning "this will erase all your previous $IRDIR files"
+			if ask "Erase all your previous $IRDIR files?" Y; then
+				if [ -n "$DIALOG" ] ; then
+					# v0.2
+					(
+						P=0
+						while [ $P -lt 95 ]; do
+							echo $P
+							sleep 0.3
 
-				printf "\n"
-				info "copying new $IRDIR files"
-				cp -Rfv "$UWORKDIR/Infrared/IRDB" "$EXTDIR/infrared/IRDB"
-				success "done copying $IRDIR files"
+							if [ $P -lt 70 ]; then
+								P=$((P+2))
+							else
+								P=$((P+1))
+							fi
+						done &
 
-				printf "\n"
-				info "cleaning $IRDIR repo"
-				_foo_suzuki_irdb
-				success "done cleaning $IRDIR repo"
+						FAKEPID=$!
+
+						rm -Rfv "$EXTDIR/infrared/IRDB" >/dev/null || exit 1
+						cp -iRfv "$UWORKDIR/Infrared/IRDB" "$EXTDIR/infrared/IRDB" >/dev/null || exit 1
+						_foo_suzuki_irdb
+
+						kill $FAKEPID 2>/dev/null
+
+						echo 100
+						sleep 0.3
+					) | dialog --title " replacing " --gauge "\n  $ZFILE" 8 70 0
+				else
+					info "erasing old $IRDIR files"
+					rm -Rfv "$EXTDIR/infrared/IRDB"
+					success "done erasing $IRDIR files"
+
+					printf "\n"
+					info "copying new $IRDIR files"
+					cp -iRfv "$UWORKDIR/Infrared/IRDB" "$EXTDIR/infrared/IRDB"
+					success "done copying $IRDIR files"
+
+					printf "\n"
+					info "cleaning $IRDIR repo"
+					_foo_suzuki_irdb
+					success "done cleaning $IRDIR repo"
+				fi
 			fi
 		fi
 	else
-		printf "\n"
-
-		error "$UWORKDIR ${red} not found!${reset}"
+		# UberGuidoZ dir not found
+		if [ -n "$DIALOG" ] ; then
+			dialog --colors --title "\Z1\Zb error " --msgbox "\n$UWORKDIR \Z1dir not found." 7 70
+			clear
+		else
+			error "$UWORKDIR ${red} not found!${reset}"
+		fi
 		exit 1
-	fi
-}
-
-function _foo_download_fw() {
-	info "$version"
-	for build in "" c e; do
-		printf "\n"
-		info "Downloading flipper-z-f7-update-$version${build}.tgz" 
-		curl -fL --progress-bar -O \
-		"$base/releases/download/$version/flipper-z-f7-update-$version${build}.tgz" \
-		-w "\n%{size_download} bytes em %{time_total}s\n"
-		success "Done downloading flipper-z-f7-update-$version${build}.tgz"
-	done
-}
-
-function _foo_download_apps() {
-	#wget "$base/releases/download/$tag/all-the-apps-base.zip"
-	#wget "$base/releases/download/$tag/all-the-apps-extra.zip"
-	info "$tag"
-	for pack in base extra; do
-		printf "\n"
-		info "Downloading all-the-apps-${pack}.zip" 
-		curl -fL --progress-bar -O \
-		"$base/releases/download/$tag/all-the-apps-${pack}.zip" \
-		-w "\n%{size_download} bytes em %{time_total}s\n"
-		success "Done downloading all-the-apps-${pack}.zip"
-	done
-}
-
-function _foo_get_fw() {
-	#https://github.com/DarkFlippers/unleashed-firmware/releases/latest
-	#https://github.com/DarkFlippers/unleashed-firmware/releases/tag/unlshd-084
-	local base="https://github.com/DarkFlippers/unleashed-firmware"
-	local tag version
-
-	tag=$(curl -Ls -o /dev/null -w '%{url_effective}' "$base/releases/latest")
-	version="${tag##*/}" # unlshd-084
-
-	if [[ -f "$FWDIR/flipper-z-f7-update-$version.tgz" || -f "$FWDIR/flipper-z-f7-update-${version}c.tgz" || -f "$FWDIR/flipper-z-f7-update-${version}e.tgz" ]] ; then
-		printf "\n"
-		warning "local fw files found"
-		printf "\n"
-		if ask "do you want to download fw files again?" N; then
-			cd $FWDIR || return 1
-			printf "\n"
-			warning "erasing local files"
-			# ask me if im sure whatever
-			rm -Rfv "flipper-z-f7-update-${version}"* # globs lol
-			printf "\n"
-			_foo_download_fw
-		fi
-	else
-		cd $FWDIR || return 1
-		_foo_download_fw
-	fi
-}
-
-function _foo_get_apps() {
-	local base="https://github.com/xMasterX/all-the-plugins"
-	local tag
-
-	tag=$(curl -Ls -o /dev/null -w '%{url_effective}' "$base/releases/latest")
-	tag="${tag##*/}"
-
-	if [[ -f "$FWDIR/all-the-apps-base.zip" || -f "$FWDIR/all-the-apps-extra.zip" ]] ; then
-		printf "\n"
-		warning "local apps zip files found"
-		printf "\n"
-		if ask "do you want to download apps zip files again?" N; then
-			cd $FWDIR || return 1
-			printf "\n"
-			warning "erasing local files"
-			rm -Rfv "all-the-apps"* # globs lol
-			printf "\n"
-			_foo_download_apps
-		fi
-	else
-		cd $FWDIR || return 1
-		_foo_download_apps
 	fi
 }
 
@@ -1346,24 +1140,24 @@ function _foo_lucaslhm() {
 }
 
 function _foo_prune_fw() {
-        local IFS FWFILE options f i
+	local IFS FWFILE options f i
 	local confdir=fw
 	info "Please select the image you would like to use"
-        cd $confdir
-        while IFS= read -r -d $'\0' f; do
-                options[i++]="$f"
-        done < <(find *.tgz -type f -print0 )
+	cd $confdir
+	while IFS= read -r -d $'\0' f; do
+		options[i++]="$f"
+	done < <(find *.tgz -type f -print0 )
 
-        select FWFILE in "${options[@]}" "Cancel"; do
-                case $FWFILE in
-                        "Cancel")
-                            return 1
-                            ;;
-                        *)
+	select FWFILE in "${options[@]}" "Cancel"; do
+		case $FWFILE in
+			"Cancel")
+			    return 1
+			    ;;
+			*)
 			    break
-                            ;;
-                esac
-        done
+			    ;;
+		esac
+	done
 
 	if [ -f ${FWFILE} ] ; then
 		if verify_sha256 ${FWFILE}.sha256 ; then
@@ -1389,6 +1183,27 @@ function _foo_prune_fw() {
 	cd ..
 }
 
+function _foo_sevenza() {
+	if [[ -f "ext-full-backup.7z" ]]; then
+		7za -y x "ext-full-backup.7z"
+	else
+		printf "\n"
+		error "${red}7z file not found. aborted!${reset}"
+		exit 1
+	fi
+}
+
+function _foo_sevenz() {
+	if [[ -f "ext-full-backup.7z" ]]; then
+		mv -v "ext-full-backup.7z" "ext-full-backup_${date}.7z"
+	else
+		7z -y ext "ext-full-backup.7z"
+
+		printf "\n"
+		error "${red}7z file not found. aborted!${reset}"
+		exit 1
+	fi
+}
 
 # build
 # - check if exist before building
@@ -1420,7 +1235,6 @@ function _foo_prune_fw() {
 
 # - Check dist/ for build outputs.
 # Use flipper-z-{target}-update-{suffix}.tgz to flash your device.
-
 
 # REFACTOR it at some time
 function quit() {
@@ -1468,7 +1282,6 @@ function quit() {
 	fi
 }
 
-
 # Basic requires
 for prg in $REQUIRES; do
 	t=$(command -v $prg)
@@ -1494,12 +1307,13 @@ REPEAT=""
 while [ -z "$REPEAT" ]; do
 	REPEAT="no"
 	case "$1" in
-		--about|--help|--emoisemo|--lucaslhm|--uberguidoz|--clean-fap|--clean-totp|--copy|--cp-irdb|--get-apps|--get-fw|--new-fw|--copy-sd|--test|--update-all)
+		--about|--bootstrap|--dbootstrap|--help|--emoisemo|--lucaslhm|--uberguidoz|--clean-fap|--clean-totp|--copy|--cp-irdb|--get-apps|--get-fw|--new-fw|--copy-sd|--test|--update-all)
+			# DIALOG="" # uncomment to disable dialog execution
 			MENU="no"
 			;;
 		--no-dialog)
 			DIALOG=""
-			REPEAT=""
+			1REPEAT=""
 			shift
 			;;
 		--welcome)
@@ -1508,11 +1322,9 @@ while [ -z "$REPEAT" ]; do
 	esac
 done
 
-
 if [ "$SPLASH" = "yes" ] ; then
 	_splash
 fi
-
 
 #Script header output.
 if [ "$WELCOME" = "yes" ]; then
@@ -1520,7 +1332,7 @@ if [ "$WELCOME" = "yes" ]; then
 
 	This script is a Flipper Zero maintenance Swiss knife.
 
-	  This can download fw and apps from the internet
+	  This can download ufw and apps from the internet
 	  process and deploy the zip files
 	  then copy everything to sd card.
 
@@ -1540,7 +1352,6 @@ if [ "$CIAO" = "yes" ] ; then
 fi
 
 if [ "$MENU" = "yes" ]; then
-
 	while true
 	do
 		if [ -n "$DIALOG" ] ; then
@@ -1577,7 +1388,7 @@ if [ "$MENU" = "yes" ]; then
 		case $ans in
 			1|f)
 				clear
-				_foo_get_fw
+				_foo_get_ufw
 				printf "\n"
 				pause
 			;;
@@ -1614,7 +1425,6 @@ if [ "$MENU" = "yes" ]; then
 			;;
 		esac
 	done
-
 fi # proceed
 
 # loop through command line arguments, until none are left.
@@ -1623,12 +1433,18 @@ if [ -n "$1" ]; then
 	do
 		case "$1" in
 			--about)
-				echo -e "\n$BGTITLE"
-				echo -e "Copyright (C) 2016 Free Software Foundation, Inc."
-				echo -e "\nThis is free software; see the source for copying conditions. There is NO"
-				echo -e "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
-				echo -e "\n(c) 2023 - Written/Tested by ${blink_red}NUMAflex${reset}"
-				echo -e "\t\tfor Flipper Zero"
+				echo -e "  Copyright (C) 2022 Free Software Foundation, Inc."
+				echo -e "\n  This is free software; see the source for copying conditions. There is NO"
+				echo -e "  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+				echo -e "\n  Written/Tested by ${red}NUMAflex${reset}"
+				exit 0
+			;;
+			--bootstrap)
+				_foo_dir_bootstrap
+				exit 0
+			;;
+			--dbootstrap)
+				_foo_dir_dbootstrap
 				exit 0
 			;;
 			--uberguidoz)
@@ -1661,7 +1477,7 @@ if [ -n "$1" ]; then
 				exit 0
 			;;
 			--get-fw)
-				_foo_get_fw
+				_foo_get_ufw
 				exit 0
 			;;
 			--new-fw)
@@ -1669,11 +1485,23 @@ if [ -n "$1" ]; then
 				exit 0
 			;;
 			--copy-sd)
+				warning "make sure it's Flipper formated, labeled FLIPPER SD and mounted!"
+				printf "\n"
 				_foo_deploy_to_sd
+				pause
+				if [ -n "$DIALOG" ] ; then
+					dialog --colors --title " OK " --msgbox "\nHave a nice day! \Z3:)\Zn" 7 70
+					clear
+				else
+					printf "\n"
+					success "Have a nice day! ${yellow}:)${reset}"
+				fi
 				exit 0
 			;;
 			--test)
-				echo "$HOME"
+				comm -23 \
+				<(find "$EXTDIR" -type f | sed "s|$EXTDIR||" | sort) \
+				<(find "$SDDIR" -type f | sed "s|$SDDIR||" | sort)
 				exit 0
 			;;
 			#--update-all)
