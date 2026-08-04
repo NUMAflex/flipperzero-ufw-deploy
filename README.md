@@ -82,9 +82,9 @@ Flipper/
  fw/
  ├── all-the-apps-base.zip
  ├── all-the-apps-extra.zip
- ├── flipper-z-f7-update-unlshd-089.tgz (optional)
- ├── flipper-z-f7-update-unlshd-089c.tgz
- └── flipper-z-f7-update-unlshd-089e.tgz (optional)
+ ├── flipper-z-f7-update-unlshd-###.tgz (optional)
+ ├── flipper-z-f7-update-unlshd-###c.tgz
+ └── flipper-z-f7-update-unlshd-###e.tgz (optional)
 ```
 
 ## 🔗 Links
