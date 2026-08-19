@@ -250,11 +250,11 @@ _foo_register_fap base "$BLDIR" "ble_spam.fap"
 # Games #
 #########
 # SNAKE20 (extra)
-_foo_register_fap extra "$GMDIR" "snake20.fap" # extra package
+_foo_register_fap extra "$GMDIR" "Arcade/snake20.fap" # extra package
 # T_REX_RUNNER (extra)
-_foo_register_fap extra "$GMDIR" "t_rex_runner.fap" # extra
+_foo_register_fap extra "$GMDIR" "Arcade/t_rex_runner.fap" # extra
 # TAMA_P1 (extra)
-_foo_register_fap extra "$GMDIR" "tama_p1.fap" # extra
+_foo_register_fap extra "$GMDIR" "Simulation/tama_p1.fap" # extra
 
 
 ########
@@ -263,19 +263,19 @@ _foo_register_fap extra "$GMDIR" "tama_p1.fap" # extra
 # I2CTOOLS
 _foo_register_fap base "$GPDIR" "i2ctools.fap"
 # LIGHTMETER
-_foo_register_fap base "$GPDIR" "lightmeter.fap"
+_foo_register_fap base "$GPDIR" "Sensors/lightmeter.fap"
 # NRF24_MOUSE_JACKER
-_foo_register_fap base "$GPDIR" "nrf24_mouse_jacker.fap"
+_foo_register_fap base "$GPDIR" "NRF24/nrf24_mouse_jacker.fap"
 # NRF24_SNIFFER
-_foo_register_fap base "$GPDIR" "nrf24_sniffer.fap"
+_foo_register_fap base "$GPDIR" "NRF24/nrf24_sniffer.fap"
 # SIGNAL_GENERATOR
 _foo_register_fap base "$GPDIR" "signal_generator.fap"
 # SPI_MEM_MANAGER
-_foo_register_fap base "$GPDIR" "spi_mem_manager.fap"
+_foo_register_fap base "$GPDIR" "Programmers/spi_mem_manager.fap"
 # UART_TERMINAL
-_foo_register_fap base "$GPDIR" "uart_terminal.fap"
+_foo_register_fap base "$GPDIR" "UART/uart_terminal.fap"
 # UNITEMP
-_foo_register_fap base "$GPDIR" "unitemp.fap"
+_foo_register_fap base "$GPDIR" "Sensors/unitemp.fap"
 
 
 ###########
@@ -300,28 +300,28 @@ _foo_register_fap extra "$IRDIR" "tagtinker.fap" # extra
 # Media #
 #########
 # METRONOME
-_foo_register_fap base "$MDDIR" "metronome.fap"
+_foo_register_fap base "$MDDIR" "Instruments/metronome.fap"
 # MORSE_CODE
 _foo_register_fap base "$MDDIR" "morse_code.fap"
 # MUSIC_PLAYER
-_foo_register_fap base "$MDDIR" "music_player.fap"
+_foo_register_fap base "$MDDIR" "Players/music_player.fap"
 # WAV_PLAYER
-_foo_register_fap base "$MDDIR" "wav_player.fap"
+_foo_register_fap base "$MDDIR" "Players/wav_player.fap"
 
 
 #######
 # NFC #
 #######
 # MFC_EDITOR
-_foo_register_fap base "$NFDIR" "mfc_editor.fap"
+_foo_register_fap base "$NFDIR" "MIFARE/mfc_editor.fap"
 # NFC_EINK
 _foo_register_fap base "$NFDIR" "nfc_eink.fap"
 # NFC_MAGIC
-_foo_register_fap base "$NFDIR" "nfc_magic.fap"
+_foo_register_fap base "$NFDIR" "MIFARE/nfc_magic.fap"
 # NFC_MAKER
 _foo_register_fap base "$NFDIR" "nfc_maker.fap"
 # PICOPASS
-_foo_register_fap base "$NFDIR" "picopass.fap"
+_foo_register_fap base "$NFDIR" "Access/picopass.fap"
 
 
 ########
@@ -343,11 +343,11 @@ _foo_register_fap base "$SBDIR" "flipper_share.fap"
 # PROTO_PIRATE
 _foo_register_fap base "$SBDIR" "proto_pirate.fap"
 # PROTOVIEW
-_foo_register_fap base "$SBDIR" "protoview.fap"
+_foo_register_fap base "$SBDIR" "Analyzers/protoview.fap"
 # RADIO_SCANNER
-_foo_register_fap base "$SBDIR" "radio_scanner.fap"
+_foo_register_fap base "$SBDIR" "Analyzers/radio_scanner.fap"
 # SPECTRUM_ANALYZER
-_foo_register_fap base "$SBDIR" "spectrum_analyzer.fap"
+_foo_register_fap base "$SBDIR" "Analyzers/spectrum_analyzer.fap"
 # SUB_DUP_FINDER (extra)
 _foo_register_fap extra "$SBDIR" "sub_dup_finder.fap" # extra
 # SUBGHZ_BRUTEFORCER
@@ -372,23 +372,23 @@ _foo_register_fap base "$TLDIR" "barcode_app.fap"
 # DTMF_DOLPHIN
 _foo_register_fap base "$TLDIR" "dtmf_dolphin.fap"
 # FORDRADIOCODE (extra)
-_foo_register_fap extra "$TLDIR" "fordradiocode.fap" # extra
+_foo_register_fap extra "$TLDIR" "Calculators/fordradiocode.fap" # extra
 # HEX_VIEWER
-_foo_register_fap base "$TLDIR" "hex_viewer.fap"
+_foo_register_fap base "$TLDIR" "Editors/hex_viewer.fap"
 # KEY_COPIER (extra)
 _foo_register_fap extra "$TLDIR" "key_copier.fap" # extra
 # MULTI_CONVERTER
-_foo_register_fap base "$TLDIR" "multi_converter.fap"
+_foo_register_fap base "$TLDIR" "Calculators/multi_converter.fap"
 # POMODORO_TIMER
-_foo_register_fap extra "$TLDIR" "pomodoro_timer.fap" # extra
+_foo_register_fap extra "$TLDIR" "Timers/pomodoro_timer.fap" # extra
 # QUAC
 _foo_register_fap base "$TLDIR" "quac.fap"
 # TEXT_VIEWER
-_foo_register_fap base "$TLDIR" "text_viewer.fap"
+_foo_register_fap base "$TLDIR" "Editors/text_viewer.fap"
 # TOTP
-_foo_register_fap base "$TLDIR" "totp.fap"
+_foo_register_fap base "$TLDIR" "Crypto/totp.fap"
 # VIN_DECODER
-_foo_register_fap extra "$TLDIR" "vin_decoder.fap" # extra
+_foo_register_fap extra "$TLDIR" "Calculators/vin_decoder.fap" # extra
 
 
 #######
@@ -427,9 +427,11 @@ function _cleanup() {
 
 # Pause
 function pause() {
-	local message="$@"
-	[ -z $message ] && message="Press [Enter] to continue.."
-	read -p "$message" readEnterkey
+	if [ -n "$DIALOG" ] ; then
+		local message="$@"
+		[ -z $message ] && message="Press [Enter] to continue.."
+		read -p "$message" readEnterkey
+	fi
 }
 
 function info() {
@@ -1313,7 +1315,7 @@ while [ -z "$REPEAT" ]; do
 			;;
 		--no-dialog)
 			DIALOG=""
-			1REPEAT=""
+			REPEAT=""
 			shift
 			;;
 		--welcome)
@@ -1498,12 +1500,9 @@ if [ -n "$1" ]; then
 				fi
 				exit 0
 			;;
-			--test)
-				comm -23 \
-				<(find "$EXTDIR" -type f | sed "s|$EXTDIR||" | sort) \
-				<(find "$SDDIR" -type f | sed "s|$SDDIR||" | sort)
-				exit 0
-			;;
+			# --test)
+			# 	exit 0
+			# ;;
 			#--update-all)
 			#	info "Updating all..."
 			#	#_foo_emoisemo
