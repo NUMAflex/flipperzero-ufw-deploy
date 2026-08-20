@@ -1,6 +1,8 @@
-# 🐬 Flipper Zero Deploy Script
+# 🐬 Flipper Zero UFW Deploy Script
 
 A straightforward shell script to manage & deploy [DarkFlippers/unleashed-firmware](https://github.com/DarkFlippers/unleashed-firmware) files to your Flipper Zero.
+
+When it comes to computers I'm cursed with a ritualistic OCD way of doing things, everytime there was a new UFW version I would manually format the SDCARD and copy around 20.000 files by hand. I know that's essentially not necessary, but then this would be echoing in my head, so I've automated it.
 
 ---
 
@@ -87,5 +89,15 @@ Flipper/
  └── flipper-z-f7-update-unlshd-###e.tgz (optional)
 ```
 
+You can create the expected directory structure with:
+```bash
+./flipper.sh --bootstrap
+and
+./flipper.sh --dbootstrap (this will create a folder acting as the SDCARD, for testing purpose)
+```
+
 ## 🔗 Links
 - **Unleashed web page:** [flipperunleashed.com](https://flipperunleashed.com)
+
+## Disclaimer
+"This project is independent and is not affiliated with, sponsored by, or otherwise authorized by [DarkFlippers/unleashed-firmware](https://github.com/DarkFlippers/unleashed-firmware)."
