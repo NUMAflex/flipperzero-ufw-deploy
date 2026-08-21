@@ -96,6 +96,11 @@ and
 ./flipper.sh --dbootstrap (this will create a folder acting as the SDCARD, for testing purpose)
 ```
 
+Explain how it works, what have to be done and the script register fap editing (reflecting all the faps available)... and why all that instead of using the extra build. Link to UberGuidoz.
+
+Useful source of files for flipper, also has apps pack:
+## [UberGuidoZ Playground - Large collection of files - Github](https://github.com/UberGuidoZ/Flipper)
+
 ## 🔗 Links
 - **Unleashed web page:** [flipperunleashed.com](https://flipperunleashed.com)
 
