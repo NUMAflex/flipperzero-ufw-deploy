@@ -2,13 +2,13 @@
 
 A straightforward shell script to manage & deploy [DarkFlippers/unleashed-firmware](https://github.com/DarkFlippers/unleashed-firmware) files to your Flipper Zero.
 
-When it comes to computers I'm cursed with a ritualistic OCD way of doing things, everytime there was a new UFW version I would manually format the SDCARD and copy around 20.000 files by hand. I know that's essentially not necessary, but then this would be echoing in my head, so I've automated it.
+When it comes to computers I'm cursed with a ritualistic OCD way of doing things, I would manually format the SDCARD and copy around 20.000 files by hand everytime there was a new UFW version. I know that's essentially not necessary, but then this would be echoing in my head, so I've automated it.
 
 ---
 
 ## 📦 Overview
 
-`flipper.sh` is a minimal automation tool for pushing files to a Flipper Zero every time there is a new UFW version release.
+`flipper.sh` is a minimal automation tool for fine-tuning your FAP collection and pushing files to a Flipper Zero every time there is a new UFW version release.
 
 It handles common repetitive tasks such as:
 
@@ -94,12 +94,13 @@ You can create the expected directory structure with:
 ./flipper.sh --bootstrap
 and
 ./flipper.sh --dbootstrap (this will create a folder acting as the SDCARD, for testing purpose)
+Also uncomment script line 45 # readonly DEBUG=1
 ```
 
-Explain how it works, what have to be done and the script register fap editing (reflecting all the faps available)... and why all that instead of using the extra build. Link to UberGuidoz.
+Explain how it works, what have to be done and the script register fap editing (reflecting all the faps available)... and why all that instead of using the extra build.
 
-Useful source of files for flipper, also has apps pack:
-## [UberGuidoZ Playground - Large collection of files - Github](https://github.com/UberGuidoZ/Flipper)
+Useful source of files for flipper:
+[UberGuidoZ Playground - Large collection of files - Github](https://github.com/UberGuidoZ/Flipper)
 
 ## 🔗 Links
 - **Unleashed web page:** [flipperunleashed.com](https://flipperunleashed.com)
